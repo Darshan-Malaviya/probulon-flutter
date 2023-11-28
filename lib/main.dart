@@ -1,6 +1,7 @@
-import 'package:dark_mode_demo/screens/sign_in_screen.dart';
+import 'package:Probulon/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'controller/localization_controller.dart';
 import 'utils/dependency_inj.dart' as dep;
 

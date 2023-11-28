@@ -1,8 +1,5 @@
 /// ignore_for_file: must_be_immutable
 
-// ignore_for_file: must_be_immutable
-
-import 'package:dark_mode_demo/common/string_res.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +7,7 @@ import '../common/images.dart';
 import '../common/language_widget.dart';
 import '../controller/localization_controller.dart';
 import '../controller/sign_controller.dart';
+import 'bottom_bar_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -108,8 +106,8 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    StringRes.directToTheCloud,
+                  Text(
+                    "directToTheCloud".tr,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -145,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: height * 0.05),
                     Text(
-                      "bienV".tr,
+                      "welcome".tr,
                       style: TextStyle(
                         fontSize: 30,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -153,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: height * 0.005),
                     Text(
-                      StringRes.iniciar,
+                      "log_in".tr,
                       style: TextStyle(
                         fontSize: 18,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -166,14 +164,14 @@ class LoginScreen extends StatelessWidget {
                         RegExp emailExp = RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                         if (value!.trim().isEmpty) {
-                          return StringRes.pleaseEnterTheMail;
+                          return "pleaseEnterTheMail".tr;
                         } else if (!emailExp.hasMatch(value)) {
-                          return StringRes.pleaseEnterTheValidMail;
+                          return "pleaseEnterTheValidMail".tr;
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: StringRes.loginLabel,
+                        labelText: "loginLabel".tr,
                         labelStyle: TextStyle(
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
@@ -195,9 +193,9 @@ class LoginScreen extends StatelessWidget {
                         RegExp passwordExp = RegExp(
                             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$&*~]).{8,}$');
                         if (value!.trim().isEmpty) {
-                          return StringRes.pleaseEnterThePassword;
+                          return "pleaseEnterThePassword".tr;
                         } else if (!passwordExp.hasMatch(value)) {
-                          return StringRes.pleaseEnterTheValidPassword;
+                          return "pleaseEnterTheValidPassword".tr;
                         }
                         return null;
                       },
@@ -215,7 +213,7 @@ class LoginScreen extends StatelessWidget {
                             color: isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
-                        labelText: StringRes.passLabel,
+                        labelText: "passLabel".tr,
                         labelStyle: TextStyle(
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
@@ -233,9 +231,8 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: height * 0.03),
                     GestureDetector(
                       onTap: () {
-                        // if (controller.formKey.currentState!.validate()) {}
-                        print('common_google_play_services_enable_button'.tr);
-                        // Get.to(bottomBarScreen());
+                        if (controller.formKey.currentState!.validate()) {}
+                        Get.to(bottomBarScreen());
                       },
                       child: Container(
                         height: height * 0.06,
@@ -244,7 +241,7 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.blue,
                         ),
-                        child: const Center(child: Text("Log In")),
+                        child: Center(child: Text("log_in".tr)),
                       ),
                     ),
                   ],
