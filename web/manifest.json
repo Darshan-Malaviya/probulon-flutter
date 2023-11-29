@@ -1,6 +1,6 @@
 {
-    "name": "Probulon",
-    "short_name": "Probulon",
+    "name": "probulon",
+    "short_name": "probulon",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
