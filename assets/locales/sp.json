@@ -1,0 +1,17 @@
+{
+  "mail": "Correo",
+  "passLabel": "Clave",
+  "pleaseEnterTheMail": "por favor ingresa el correo",
+  "pleaseEnterTheValidMail": "por favor ingrese el correo válido",
+  "pleaseEnterThePassword": "Por favor, ingrese contraseña",
+  "pleaseEnterTheValidPassword": "por favor ingrese una contraseña válida",
+  "directToTheCloud": "dirigido a la nube",
+  "welcome": "Bienvenido",
+  "log_in": "Iniciar Sesion",
+  "test": "Test",
+  "locked":"Locked",
+  "partial": "parcial",
+  "youAre": "SOS",
+  "aux": "Aux",
+  "stall":"Parar"
+}

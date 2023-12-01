@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "534409118645",
+    "project_id": "probulon-64a3c",
+    "storage_bucket": "probulon-64a3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534409118645:android:8be21c9aba75dea246cffc",
+        "android_client_info": {
+          "package_name": "com.example.probulon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7VuLE3mqsTHB72qub0sWdph8wBxUBJrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
