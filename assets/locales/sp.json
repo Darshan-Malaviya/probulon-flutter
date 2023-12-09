@@ -11,7 +11,17 @@
   "test": "Test",
   "locked":"Locked",
   "partial": "parcial",
-  "youAre": "SOS",
+  "youare": "SOS",
   "aux": "Aux",
-  "stall":"Parar"
+  "stall":"Parar",
+  "start": "Inicio",
+  "notifications": "Notificaciones",
+  "scenarios": "Escenarios",
+  "devices": "Dispositivos",
+  "cloud": "cloud",
+  "blocked": "bloquaeado",
+  "evidence": "Pruebas",
+  "armed": "armado",
+  "myfacilities": "Mis instalaciones",
+  "theseare": "Estas son tus instalaciones contratadas"
 }

@@ -1,13 +1,17 @@
 /// ignore_for_file: must_be_immutable
 
+// ignore_for_file: must_be_immutable
+
+import 'package:Probulon/screens/bottom_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Api/repository/login_repository.dart';
 import '../common/images.dart';
 import '../common/language_widget.dart';
 import '../controller/localization_controller.dart';
 import '../controller/sign_controller.dart';
-import 'bottom_bar_screen.dart';
+import '../utils/pref_services.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -16,12 +20,31 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-
     final height = Get.height;
     final width = Get.width;
+
+    Future<dynamic> handleLogin(email, password) async {
+      final response = await LoginRepo().callLoginApi(
+        email,
+        password,
+      );
+      if (response['isSuccess'] == true && response['status'] == 'SUCCESS') {
+        PrefService.setValue('isLogged', true);
+        Get.to(bottomBarScreen());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response['message']),
+          ),
+        );
+      }
+      return response;
+    }
+
     return Scaffold(
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        elevation: 0,
+        elevation: isDarkMode ? 0 : 2,
         toolbarHeight: height * 0.075,
         backgroundColor:
             isDarkMode ? Colors.black.withOpacity(0.2) : Colors.white,
@@ -30,63 +53,60 @@ class LoginScreen extends StatelessWidget {
             onTap: () {
               Get.bottomSheet(
                 backgroundColor: Colors.transparent,
-                Container(
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30)),
-                          color: Colors.white,
+                Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30)),
+                        color: Colors.white,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30)),
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: GetBuilder<LocalizationController>(
+                          builder: (localizationController) {
+                            return Column(
+                              // mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'select_language'.tr,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                ListView.builder(
+                                    itemCount: 2,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) =>
+                                        LanguageWidget(
+                                          languageModel: localizationController
+                                              .languages[index],
+                                          localizationController:
+                                              localizationController,
+                                          index: index,
+                                        )),
+                              ],
+                            );
+                          },
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30)),
-                          color: Colors.black.withOpacity(0.4),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: GetBuilder<LocalizationController>(
-                            builder: (localizationController) {
-                              return Column(
-                                // mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'select_language'.tr,
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  ListView.builder(
-                                      itemCount: 2,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) =>
-                                          LanguageWidget(
-                                            languageModel:
-                                                localizationController
-                                                    .languages[index],
-                                            localizationController:
-                                                localizationController,
-                                            index: index,
-                                          )),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
             },
@@ -161,17 +181,13 @@ class LoginScreen extends StatelessWidget {
                     TextFormField(
                       controller: signinCntrl.emailcntrl,
                       validator: (value) {
-                        RegExp emailExp = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                         if (value!.trim().isEmpty) {
                           return "pleaseEnterTheMail".tr;
-                        } else if (!emailExp.hasMatch(value)) {
-                          return "pleaseEnterTheValidMail".tr;
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: "loginLabel".tr,
+                        labelText: "mail".tr,
                         labelStyle: TextStyle(
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
@@ -190,12 +206,8 @@ class LoginScreen extends StatelessWidget {
                     TextFormField(
                       controller: signinCntrl.passcntrl,
                       validator: (value) {
-                        RegExp passwordExp = RegExp(
-                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$&*~]).{8,}$');
                         if (value!.trim().isEmpty) {
                           return "pleaseEnterThePassword".tr;
-                        } else if (!passwordExp.hasMatch(value)) {
-                          return "pleaseEnterTheValidPassword".tr;
                         }
                         return null;
                       },
@@ -231,8 +243,12 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: height * 0.03),
                     GestureDetector(
                       onTap: () {
-                        if (controller.formKey.currentState!.validate()) {}
-                        Get.to(bottomBarScreen());
+                        if (controller.formKey.currentState!.validate()) {
+                          handleLogin(
+                            signinCntrl.emailcntrl.text,
+                            signinCntrl.passcntrl.text,
+                          );
+                        }
                       },
                       child: Container(
                         height: height * 0.06,

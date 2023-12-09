@@ -1,72 +1,120 @@
+import 'package:Probulon/controller/nav_bar_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class bottomBarScreen extends StatefulWidget {
-  @override
-  _bottomBarScreenState createState() => _bottomBarScreenState();
-}
+class bottomBarScreen extends StatelessWidget {
+  bottomBarScreen({super.key});
 
-class _bottomBarScreenState extends State<bottomBarScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = [
-    Container(color: Colors.blue, child: Center(child: Text('Page 1'))),
-    Container(color: Colors.green, child: Center(child: Text('Page 2'))),
-    Container(color: Colors.orange, child: Center(child: Text('Page 3'))),
-    Container(color: Colors.purple, child: Center(child: Text('Page 4'))),
-  ];
+  NavBarCntrl navBarCntrl = Get.put(NavBarCntrl());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Bottom Navigation Bar Example'),
-      ),
-      drawer: Drawer(),
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed, // Disable animation
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: _currentIndex == 0 ? Colors.white : Colors.grey,
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+    final height = Get.height;
+    final width = Get.width;
+    return GetBuilder<NavBarCntrl>(
+      id: 'bottombar',
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          appBar: AppBar(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            toolbarHeight: height * 0.075,
+            // backgroundColor: Colors.black,
+            title: Text(
+              navBarCntrl.title[navBarCntrl.currentIndex],
+              style: TextStyle(
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
-            label: 'Page 1',
+            actions: [navBarCntrl.actions[navBarCntrl.currentIndex]],
+            elevation: 0,
+            leading: Icon(
+              Icons.menu,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.business,
-              color: _currentIndex == 1 ? Colors.white : Colors.grey,
+          drawer: Drawer(),
+          body: navBarCntrl.pages[navBarCntrl.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            currentIndex: navBarCntrl.currentIndex,
+            selectedLabelStyle: TextStyle(
+              color: Colors.white,
             ),
-            label: 'Page 2',
+            unselectedLabelStyle: TextStyle(color: Colors.white),
+            onTap: (index) {
+              navBarCntrl.currentIndex = index;
+              controller.update(['bottombar']);
+            },
+            type: BottomNavigationBarType.fixed, // Disable animation
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.workspaces_outline,
+                  color: navBarCntrl.currentIndex == 0
+                      ? Colors.white
+                      : Colors.grey,
+                ),
+                activeIcon: Icon(
+                  Icons.workspaces,
+                  color: navBarCntrl.currentIndex == 0
+                      ? Colors.grey
+                      : Colors.white,
+                ),
+                label: "devices".tr,
+                backgroundColor: Colors.white,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.watch_later_outlined,
+                  color: navBarCntrl.currentIndex == 1
+                      ? Colors.white
+                      : Colors.grey,
+                ),
+                activeIcon: Icon(
+                  Icons.watch_later,
+                  color: navBarCntrl.currentIndex == 1
+                      ? Colors.grey
+                      : Colors.white,
+                ),
+                label: 'scenarios'.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.notifications,
+                  color: navBarCntrl.currentIndex == 2
+                      ? Colors.white
+                      : Colors.grey,
+                ),
+                activeIcon: Icon(
+                  Icons.notifications_active,
+                  color: navBarCntrl.currentIndex == 2
+                      ? Colors.grey
+                      : Colors.white,
+                ),
+                label: 'notifications'.tr,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.lock_outline,
+                  color: navBarCntrl.currentIndex == 3
+                      ? Colors.white
+                      : Colors.grey,
+                ),
+                activeIcon: Icon(
+                  Icons.lock,
+                  color: navBarCntrl.currentIndex == 3
+                      ? Colors.grey
+                      : Colors.white,
+                ),
+                label: 'start'.tr,
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.school,
-              color: _currentIndex == 2 ? Colors.white : Colors.grey,
-            ),
-            label: 'Page 3',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.lock_outline,
-              color: _currentIndex == 3 ? Colors.white : Colors.grey,
-            ),
-            activeIcon: Icon(
-              Icons.lock,
-              color: _currentIndex == 3 ? Colors.white : Colors.grey,
-            ),
-            label: 'Page 4',
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

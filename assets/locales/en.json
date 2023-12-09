@@ -11,7 +11,17 @@
   "test": "Test",
   "locked":"bloqueado",
   "partial":"partial",
-  "youAre": "you are",
+  "youare": "you are",
   "aux": "Aux",
-  "stall": "Stall"
+  "stall": "Stall",
+  "start": "Start",
+  "notifications": "Notifications",
+  "scenarios": "Scenarios",
+  "devices": "Devices",
+  "cloud": "cloud",
+  "blocked": "blocked",
+  "evidence": "Evidence",
+  "armed": "armed",
+  "myfacilities": "My facilities",
+  "theseare": "These are your contracted facilities"
 }
