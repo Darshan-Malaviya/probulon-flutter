@@ -3,4 +3,7 @@ class ApiConsts {
 
   // login consts
   static const loginUrl = '$baseUrl/auth/login';
+
+  // getuser consts
+  static const getUsers = '$baseUrl/users/getAll';
 }
