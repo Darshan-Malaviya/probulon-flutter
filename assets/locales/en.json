@@ -23,5 +23,16 @@
   "evidence": "Evidence",
   "armed": "armed",
   "myfacilities": "My facilities",
-  "theseare": "These are your contracted facilities"
+  "theseare": "These are your contracted facilities",
+  "volumelevel": "Alarm volume level",
+  "myprofile": "My profile",
+  "statusReview": "Status review",
+  "users": "Users",
+  "actions": "Actions",
+  "facilities": "Facilities",
+  "notificationhistory": "Notification history",
+  "settings": "Settings",
+  "help": "Help",
+  "logout":"Log Out",
+  "copyrights": "Copyright Probulon All rights reserved"
 }

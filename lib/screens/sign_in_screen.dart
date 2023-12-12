@@ -2,7 +2,7 @@
 
 // ignore_for_file: must_be_immutable
 
-import 'package:Probulon/screens/bottom_bar_screen.dart';
+import 'package:Probulon/screens/dashbord_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       );
       if (response['isSuccess'] == true && response['status'] == 'SUCCESS') {
         PrefService.setValue('isLogged', true);
-        Get.to(bottomBarScreen());
+        Get.to(DashBoardScreen());
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

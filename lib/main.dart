@@ -1,3 +1,4 @@
+import 'package:Probulon/screens/dashbord_screen.dart';
 import 'package:Probulon/screens/sign_in_screen.dart';
 import 'package:Probulon/utils/pref_services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller/localization_controller.dart';
-import 'screens/users_screen.dart';
 import 'utils/dependency_inj.dart' as dep;
 
 Future<void> main() async {
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: Locale(AppConstants.languages[1].languageCode,
               AppConstants.languages[1].countryCode),
           debugShowCheckedModeBanner: false,
-          home: isLogged ? UsersScreen() : LoginScreen(),
+          home: isLogged ? DashBoardScreen() : LoginScreen(),
         );
       },
     );

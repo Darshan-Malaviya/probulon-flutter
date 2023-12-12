@@ -6,4 +6,9 @@ class textStyleRes {
     color: Colors.white,
     fontWeight: FontWeight.w400,
   );
+  static const largeText = TextStyle(
+    fontSize: 30,
+    color: Colors.white,
+    fontWeight: FontWeight.w400,
+  );
 }

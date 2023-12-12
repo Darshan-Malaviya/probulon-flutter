@@ -23,5 +23,17 @@
   "evidence": "Pruebas",
   "armed": "armado",
   "myfacilities": "Mis instalaciones",
-  "theseare": "Estas son tus instalaciones contratadas"
+  "theseare": "Estas son tus instalaciones contratadas",
+  "volumelevel": "Nivel de volumen de alarma al",
+  "myprofile": "Mi perfil",
+  "statusReview": "Revision de estado",
+  "users": "Usuarios",
+  "actions": "Acciones",
+  "facilities": "Instalaciones",
+  "notificationhistory": "Historial de notificaciones",
+  "settings": "Ajustes",
+  "help": "Ayuda",
+  "logout": "Cerrar sesion",
+  "copyrights": "Copyright Probulon Todos los derechos reservados"
+
 }
