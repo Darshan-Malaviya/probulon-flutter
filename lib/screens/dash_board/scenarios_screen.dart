@@ -1,14 +1,15 @@
 import 'package:Probulon/common/color.dart';
-import 'package:Probulon/controller/devices_controller.dart';
-import 'package:Probulon/screens/device_detail_screen.dart';
+import 'package:Probulon/controller/dash_board_controller/scenarios_controller.dart';
+import 'package:Probulon/screens/dash_board/add_scenarios_screen.dart';
+import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DevicecScreen extends StatelessWidget {
-  DevicecScreen({super.key});
+class ScenariosScreen extends StatelessWidget {
+  ScenariosScreen({super.key});
 
-  DevicesCntrl deviceCntrl = Get.put(DevicesCntrl());
+  ScenariosCntrl seenarioCntrl = Get.put(ScenariosCntrl());
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -16,8 +17,55 @@ class DevicecScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
+      key: seenarioCntrl.scaffoldKey,
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
-      body: GetBuilder<DevicesCntrl>(
+      appBar: AppBar(
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        toolbarHeight: height * 0.075,
+        title: Text(
+          "nitzsche.com".tr,
+          style: TextStyle(
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        elevation: 0,
+        actions: [
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: width * 0.03),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.04,
+                  vertical: Get.height * 0.008,
+                ),
+                decoration: BoxDecoration(
+                  color: ColorUtils.appColor,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Text(
+                  "blocked".tr,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+        leading: InkResponse(
+          onTap: () {
+            seenarioCntrl.scaffoldKey.currentState?.openDrawer();
+          },
+          child: Icon(
+            Icons.menu,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+      drawer: CommonDrawer(),
+      body: GetBuilder<ScenariosCntrl>(
         id: 'scenarios',
         builder: (controller) {
           return Column(
@@ -39,7 +87,7 @@ class DevicecScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "sjjgohgjsdouuohjvnasjkvcmfd",
+                          "createscenario".tr,
                           style: textStyleRes.mediumText.copyWith(
                             color: isDarkMode ? Colors.white : Colors.black,
                             fontSize: 16,
@@ -67,9 +115,7 @@ class DevicecScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.to(DeviceDetailScreen(
-                          name: deviceCntrl.name[index],
-                        ));
+                        Get.to(AddScrenario());
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: height * 0.008),
@@ -91,7 +137,7 @@ class DevicecScreen extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            deviceCntrl.switchValues[index] == true
+                            seenarioCntrl.switchValues[index] == true
                                 ? Container(
                                     width: width * 0.015,
                                     decoration: BoxDecoration(
@@ -110,16 +156,16 @@ class DevicecScreen extends StatelessWidget {
                                 activeTrackColor: Colors.blue.withOpacity(0.8),
                                 inactiveThumbColor: Colors.grey.shade50,
                                 activeColor: Colors.white,
-                                value: deviceCntrl.switchValues[index],
+                                value: seenarioCntrl.switchValues[index],
                                 onChanged: (value) {
-                                  deviceCntrl.switchValues[index] = value;
+                                  seenarioCntrl.switchValues[index] = value;
                                   controller.update(['scenarios']);
                                 },
                               ),
                             ),
                             SizedBox(width: width * 0.01),
                             Text(
-                              deviceCntrl.name[index],
+                              seenarioCntrl.name[index],
                               style: textStyleRes.mediumText.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,

@@ -2,16 +2,17 @@
 
 // ignore_for_file: must_be_immutable
 
-import 'package:Probulon/screens/dashbord_screen.dart';
+import 'package:Probulon/common/common_textfield.dart';
+import 'package:Probulon/screens/dash_board/dashbord_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Api/repository/login_repository.dart';
-import '../common/images.dart';
-import '../common/language_widget.dart';
-import '../controller/localization_controller.dart';
-import '../controller/sign_controller.dart';
-import '../utils/pref_services.dart';
+import '../../Api/repository/login_repository.dart';
+import '../../common/images.dart';
+import '../../common/language_widget.dart';
+import '../../controller/auth_controller/log_in_controller.dart';
+import '../../controller/localization_controller.dart';
+import '../../utils/pref_services.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -178,67 +179,18 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: height * 0.03),
-                    TextFormField(
+                    CommonTextField(
+                      lableText: "mail",
+                      validationErrorText: 'pleaseEnterTheMail',
                       controller: signinCntrl.emailcntrl,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return "pleaseEnterTheMail".tr;
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: "mail".tr,
-                        labelStyle: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.teal, width: 2),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        border: OutlineInputBorder(
-                          // borderSide: BorderSide(color: Colors.red, width: 2),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                      ),
+                      themeMode: isDarkMode,
                     ),
                     SizedBox(height: height * 0.03),
-                    TextFormField(
+                    CommonTextField(
+                      lableText: "passLabel",
+                      validationErrorText: 'pleaseEnterThePassword',
                       controller: signinCntrl.passcntrl,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return "pleaseEnterThePassword".tr;
-                        }
-                        return null;
-                      },
-                      obscureText: controller.obsecure,
-                      decoration: InputDecoration(
-                        suffixIcon: InkResponse(
-                          onTap: () {
-                            controller.obsecure = !controller.obsecure;
-                            controller.update(['sign']);
-                          },
-                          child: Icon(
-                            controller.obsecure
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        labelText: "passLabel".tr,
-                        labelStyle: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.teal, width: 2),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        border: OutlineInputBorder(
-                          // borderSide: BorderSide(color: Colors.red, width: 2),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                      ),
+                      themeMode: isDarkMode,
                     ),
                     SizedBox(height: height * 0.03),
                     GestureDetector(

@@ -1,11 +1,11 @@
-import 'package:Probulon/screens/dashbord_screen.dart';
-import 'package:Probulon/screens/sign_in_screen.dart';
+import 'package:Probulon/screens/dash_board/dashbord_screen.dart';
 import 'package:Probulon/utils/pref_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller/localization_controller.dart';
+import 'screens/auth/log_in_screen.dart';
 import 'utils/dependency_inj.dart' as dep;
 
 Future<void> main() async {

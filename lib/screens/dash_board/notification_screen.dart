@@ -1,15 +1,15 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:Probulon/common/color.dart';
+import 'package:Probulon/controller/dash_board_controller/notification_screen_controller.dart';
+import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/notification_controller.dart';
-
 class NotificationScreen extends StatelessWidget {
   NotificationScreen({super.key});
+
   NotificationCntrl notificationCntrl = Get.put(NotificationCntrl());
+
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -17,19 +17,73 @@ class NotificationScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
+      key: notificationCntrl.scaffoldKey,
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      appBar: AppBar(
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        toolbarHeight: height * 0.075,
+        title: Text(
+          "test".tr,
+          style: TextStyle(
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        elevation: 0,
+        actions: [
+          Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: width * 0.03, vertical: height * 0.02),
+            padding: EdgeInsets.symmetric(
+              horizontal: Get.width * 0.03,
+              vertical: Get.height * 0.008,
+            ),
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? ColorUtils.appColor
+                  : Colors.teal.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Center(
+              child: Text(
+                "asleep".tr,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: width * 0.04),
+            child: Icon(
+              Icons.bluetooth_disabled,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+        ],
+        leading: InkResponse(
+          onTap: () {
+            notificationCntrl.scaffoldKey.currentState?.openDrawer();
+          },
+          child: Icon(
+            Icons.menu,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+      drawer: CommonDrawer(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.03),
         child: GetBuilder<NotificationCntrl>(
-          id: 'notification',
+          id: 'facilities',
           builder: (controller) {
             return Column(
               children: [
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * 0.02),
                 Container(
                   height: height * 0.1,
                   width: width,
-                  padding: EdgeInsets.only(left: width * 0.05),
                   decoration: BoxDecoration(
                     color: isDarkMode
                         ? ColorUtils.grey.withOpacity(0.3)
@@ -44,26 +98,37 @@ class NotificationScreen extends StatelessWidget {
                     ],
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
                     children: [
-                      Text(
-                        "myfacilities".tr,
-                        style: textStyleRes.mediumText.copyWith(
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+                        child: Icon(
+                          Icons.notifications_active_outlined,
+                          size: 25,
                           color: isDarkMode ? Colors.white : Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: height * 0.005),
-                      Text(
-                        "theseare".tr,
-                        style: textStyleRes.mediumText.copyWith(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "notifications".tr,
+                            style: textStyleRes.mediumText.copyWith(
+                              color: isDarkMode ? Colors.white : Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: height * 0.005),
+                          Text(
+                            "theseare".tr,
+                            style: textStyleRes.mediumText.copyWith(
+                              color: isDarkMode ? Colors.white : Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -73,6 +138,7 @@ class NotificationScreen extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return Container(
+                      height: height * 0.09,
                       margin: EdgeInsets.symmetric(
                           horizontal: width * 0.01, vertical: height * 0.01),
                       decoration: BoxDecoration(
@@ -93,26 +159,10 @@ class NotificationScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                // horizontal: width * 0.03,
-                                vertical: height * 0.02),
-                            child: Transform.scale(
-                              scale: 1.3,
-                              child: Switch(
-                                inactiveTrackColor: isDarkMode
-                                    ? Colors.white.withOpacity(0.5)
-                                    : Colors.grey,
-                                activeTrackColor: Colors.blue.withOpacity(0.8),
-                                inactiveThumbColor: Colors.grey.shade50,
-                                activeColor: Colors.white,
-                                value: notificationCntrl.switchValues[index],
-                                onChanged: (value) {
-                                  notificationCntrl.switchValues[index] = value;
-                                  controller.update(['notification']);
-                                },
-                              ),
-                            ),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            size: 25,
+                            color: isDarkMode ? Colors.white : Colors.black,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -123,16 +173,15 @@ class NotificationScreen extends StatelessWidget {
                                 style: textStyleRes.mediumText.copyWith(
                                   color:
                                       isDarkMode ? Colors.white : Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                 ),
                               ),
                               SizedBox(
                                 width: width * 0.4,
                                 child: Text(
-                                  maxLines: 3,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  "evidencezdievidencezdievidencezdi",
+                                  "evidencezdievidendei",
                                   style: textStyleRes.mediumText.copyWith(
                                     color: isDarkMode
                                         ? Colors.white
@@ -143,21 +192,21 @@ class NotificationScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Container(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: width * 0.02),
-                            height: height * 0.025,
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(7)),
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.red,
                             child: Center(
                               child: Text(
-                                "Demosf",
-                                style: textStyleRes.mediumText.copyWith(
-                                  fontSize: 15,
-                                ),
+                                '1',
+                                style: textStyleRes.smallText
+                                    .copyWith(fontSize: 15),
                               ),
                             ),
+                          ),
+                          Icon(
+                            Icons.delete,
+                            size: 25,
+                            color: Colors.red,
                           ),
                         ],
                       ),

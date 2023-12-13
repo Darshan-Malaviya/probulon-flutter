@@ -16,6 +16,7 @@
   "stall":"Parar",
   "start": "Inicio",
   "notifications": "Notificaciones",
+  "alarams": "Alarms",
   "scenarios": "Escenarios",
   "devices": "Dispositivos",
   "cloud": "cloud",
@@ -34,6 +35,22 @@
   "settings": "Ajustes",
   "help": "Ayuda",
   "logout": "Cerrar sesion",
-  "copyrights": "Copyright Probulon Todos los derechos reservados"
+  "copyrights": "Copyright Probulon Todos los derechos reservados",
+  "createdevice": "Crea dispositivos para tener mas control de tu instalacion",
+  "disarmed": "desarmado",
+  "scenariotype": "Tipo de ejecucio de escenario",
+  "createscenario": "Crea un scenario para activar periodicamente un dispositivo o usuario",
+  "desctype": "Se ejecutará diariamente o semanalmente, según lo escojas (guarda los cambios del escenario antes de salir)",
+  "name": "Nombre",
+  "dec": "Descripcion",
+  "namevalidation": "Por favor ingrese el nombre",
+  "descriptionvalidation": "Por favor ingresa la descripción",
+  "update": "Actualizar",
+  "eliminate": "Eliminar",
+  "typeofscenario": "Tipo de escenario",
+  "daily": "diariamente",
+  "weekly": "semanalmente",
+  "dailyexecution": "Ejecución diaria",
+  "asleep": "dormido"
 
 }
