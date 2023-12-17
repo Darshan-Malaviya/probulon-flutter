@@ -1,4 +1,5 @@
 import 'package:Probulon/screens/dash_board/dashbord_screen.dart';
+import 'package:Probulon/utils/firebase_service.dart';
 import 'package:Probulon/utils/pref_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'utils/dependency_inj.dart' as dep;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await FirebaseService.initializeFirebaseApp();
   Map<String, Map<String, String>> languages = await dep.init();
   PrefService.init();
   runApp(MyApp(languages: languages));
