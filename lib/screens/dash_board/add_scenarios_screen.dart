@@ -22,9 +22,14 @@ class AddScrenario extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: isDarkMode ? Colors.white : Colors.black,
+        leading: InkResponse(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
         ),
         title: Text(
           "gerlach.com".tr,

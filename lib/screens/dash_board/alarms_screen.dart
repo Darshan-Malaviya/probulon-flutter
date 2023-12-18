@@ -18,15 +18,11 @@ class AlarmsScreen extends StatelessWidget {
     final width = Get.width;
     return Scaffold(
       key: alarmsCntrl.scaffoldKey,
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         toolbarHeight: height * 0.075,
         title: Text(
           "greenfelder.com".tr,
-          style: TextStyle(
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
+          style: TextStyle(),
         ),
         elevation: 0,
         actions: [
@@ -54,15 +50,6 @@ class AlarmsScreen extends StatelessWidget {
             ],
           ),
         ],
-        leading: InkResponse(
-          onTap: () {
-            alarmsCntrl.scaffoldKey.currentState?.openDrawer();
-          },
-          child: Icon(
-            Icons.menu,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
       ),
       drawer: CommonDrawer(),
       body: GetBuilder<ScenariosCntrl>(
@@ -82,7 +69,6 @@ class AlarmsScreen extends StatelessWidget {
                         Text(
                           "alarams".tr,
                           style: textStyleRes.mediumText.copyWith(
-                            color: isDarkMode ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -91,7 +77,6 @@ class AlarmsScreen extends StatelessWidget {
                           child: Text(
                             "createdevice".tr,
                             style: textStyleRes.mediumText.copyWith(
-                              color: isDarkMode ? Colors.white : Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -105,7 +90,6 @@ class AlarmsScreen extends StatelessWidget {
                       backgroundColor: Colors.lightBlue,
                       child: Icon(
                         Icons.add,
-                        color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
@@ -124,7 +108,7 @@ class AlarmsScreen extends StatelessWidget {
                         width: width,
                         decoration: BoxDecoration(
                           color: isDarkMode
-                              ? ColorUtils.grey.withOpacity(0.3)
+                              ? ColorUtils.containerColor
                               : Colors.white,
                           boxShadow: [
                             BoxShadow(
@@ -160,13 +144,11 @@ class AlarmsScreen extends StatelessWidget {
                               style: textStyleRes.mediumText.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,
-                                color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
                             Spacer(),
                             Icon(
                               Icons.arrow_forward_ios,
-                              color: isDarkMode ? Colors.white : Colors.black,
                             ),
                             SizedBox(width: width * 0.02),
                           ],

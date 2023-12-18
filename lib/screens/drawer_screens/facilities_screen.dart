@@ -1,11 +1,13 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:Probulon/common/color.dart';
+import 'package:Probulon/common/images.dart';
+import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/facilities_controller.dart';
+import '../../controller/drawer_controller/facilities_controller.dart';
 
 class FacilitiesScreen extends StatelessWidget {
   FacilitiesScreen({super.key});
@@ -17,7 +19,70 @@ class FacilitiesScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      appBar: AppBar(
+        toolbarHeight: height * 0.075,
+        title: Text(
+          "evidence".tr,
+          style: textStyleRes.mediumText,
+        ),
+        elevation: 0,
+        actions: [
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.03,
+                  vertical: Get.height * 0.008,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Text(
+                  "armed".tr,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.04,
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Get.width * 0.02,
+                  vertical: Get.height * 0.004,
+                ),
+                decoration: BoxDecoration(
+                  color: ColorUtils.appColor,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      ImgRes.cloud,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(width: Get.width * 0.02),
+                    Text(
+                      "cloud".tr,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      drawer: CommonDrawer(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.03),
         child: GetBuilder<FacilitiesCntrl>(
@@ -51,7 +116,6 @@ class FacilitiesScreen extends StatelessWidget {
                       Text(
                         "myfacilities".tr,
                         style: textStyleRes.mediumText.copyWith(
-                          color: isDarkMode ? Colors.white : Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
@@ -60,7 +124,6 @@ class FacilitiesScreen extends StatelessWidget {
                       Text(
                         "theseare".tr,
                         style: textStyleRes.mediumText.copyWith(
-                          color: isDarkMode ? Colors.white : Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
@@ -121,8 +184,6 @@ class FacilitiesScreen extends StatelessWidget {
                               Text(
                                 "evidence".tr,
                                 style: textStyleRes.mediumText.copyWith(
-                                  color:
-                                      isDarkMode ? Colors.white : Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -134,9 +195,6 @@ class FacilitiesScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   "evidencezdievidencezdievidencezdi",
                                   style: textStyleRes.mediumText.copyWith(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
                                     fontSize: 16,
                                   ),
                                 ),

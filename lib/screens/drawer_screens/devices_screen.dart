@@ -1,15 +1,15 @@
 import 'package:Probulon/common/color.dart';
 import 'package:Probulon/controller/dash_board_controller/scenarios_controller.dart';
-import 'package:Probulon/screens/dash_board/add_scenarios_screen.dart';
+import 'package:Probulon/controller/drawer_controller/devices_controller.dart';
 import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ScenariosScreen extends StatelessWidget {
-  ScenariosScreen({super.key});
+class DevicesScreen extends StatelessWidget {
+  DevicesScreen({super.key});
 
-  ScenariosCntrl seenarioCntrl = Get.put(ScenariosCntrl());
+  DeviceCntrl deviceCntrl = Get.put(DeviceCntrl());
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
@@ -17,11 +17,10 @@ class ScenariosScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
-      key: seenarioCntrl.scaffoldKey,
       appBar: AppBar(
         toolbarHeight: height * 0.075,
         title: Text(
-          "nitzsche.com".tr,
+          "greenfelder.com".tr,
           style: TextStyle(),
         ),
         elevation: 0,
@@ -39,7 +38,7 @@ class ScenariosScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Text(
-                  "blocked".tr,
+                  "disarmed".tr,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
@@ -67,16 +66,19 @@ class ScenariosScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "scenarios".tr,
+                          "alarams".tr,
                           style: textStyleRes.mediumText.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        Text(
-                          "createscenario".tr,
-                          style: textStyleRes.mediumText.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                        SizedBox(
+                          width: width * 0.8,
+                          child: Text(
+                            "createdevice".tr,
+                            style: textStyleRes.mediumText.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],
@@ -98,16 +100,14 @@ class ScenariosScreen extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {
-                        Get.to(AddScrenario());
-                      },
+                      onTap: () {},
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: height * 0.008),
                         height: height * 0.07,
                         width: width,
                         decoration: BoxDecoration(
                           color: isDarkMode
-                              ? ColorUtils.grey.withOpacity(0.3)
+                              ? ColorUtils.containerColor
                               : Colors.white,
                           boxShadow: [
                             BoxShadow(
@@ -121,29 +121,25 @@ class ScenariosScreen extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            seenarioCntrl.switchValues[index] == true
-                                ? Container(
-                                    width: width * 0.015,
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                    ),
-                                  )
-                                : SizedBox(
-                                    width: width * 0.015,
-                                  ),
                             Transform.scale(
                               scale: 1.3,
                               child: Switch(
-                                value: seenarioCntrl.switchValues[index],
+                                inactiveTrackColor: isDarkMode
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.grey,
+                                activeTrackColor: Colors.blue.withOpacity(0.8),
+                                inactiveThumbColor: Colors.grey.shade50,
+                                activeColor: Colors.white,
+                                value: deviceCntrl.switchValues[index],
                                 onChanged: (value) {
-                                  seenarioCntrl.switchValues[index] = value;
+                                  deviceCntrl.switchValues[index] = value;
                                   controller.update(['scenarios']);
                                 },
                               ),
                             ),
                             SizedBox(width: width * 0.01),
                             Text(
-                              seenarioCntrl.name[index],
+                              deviceCntrl.name[index],
                               style: textStyleRes.mediumText.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,

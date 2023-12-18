@@ -17,7 +17,6 @@ class DeviceDetailScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: GetBuilder<DeviceDetail>(
         id: 'devicedetail',
         builder: (controller) {
@@ -46,7 +45,6 @@ class DeviceDetailScreen extends StatelessWidget {
                   },
                   child: Icon(
                     Icons.arrow_back,
-                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
                 SizedBox(height: height * 0.05),

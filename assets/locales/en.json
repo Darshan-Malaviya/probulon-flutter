@@ -2,9 +2,7 @@
   "mail": "Login",
   "passLabel": "Password",
   "pleaseEnterTheMail": "Please enter email",
-  "pleaseEnterTheValidMail": "Please enter valid email",
   "pleaseEnterThePassword": "Please enter the password",
-  "pleaseEnterTheValidPassword": "Please enter the valid password",
   "directToTheCloud": "Direct to the cloud",
   "welcome": "Welcome",
   "log_in": "Log in",
@@ -51,5 +49,12 @@
   "daily": "Daily",
   "weekly": "Weekly",
   "dailyexecution": "Daily execution",
-  "asleep":"Asleep"
+  "asleep":"Asleep",
+  "firstemail": "First email",
+  "secondemail": "Second email",
+  "thirdemail": "Third email",
+  "Pleaseenterthefirstemail": "Please enter the first email",
+  "Pleaseenterthesecondemail": "Please enter the second email",
+  "Pleaseenterthethirdemail": "Please enter the third email",
+  "createUser": "Create a user add it to an installation"
 }

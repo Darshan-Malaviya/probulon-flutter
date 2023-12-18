@@ -17,16 +17,11 @@ class NotificationScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
-      key: notificationCntrl.scaffoldKey,
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         toolbarHeight: height * 0.075,
         title: Text(
           "test".tr,
-          style: TextStyle(
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
+          style: TextStyle(),
         ),
         elevation: 0,
         actions: [
@@ -58,19 +53,9 @@ class NotificationScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: width * 0.04),
             child: Icon(
               Icons.bluetooth_disabled,
-              color: isDarkMode ? Colors.white : Colors.black,
             ),
           ),
         ],
-        leading: InkResponse(
-          onTap: () {
-            notificationCntrl.scaffoldKey.currentState?.openDrawer();
-          },
-          child: Icon(
-            Icons.menu,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
       ),
       drawer: CommonDrawer(),
       body: Padding(
@@ -105,7 +90,6 @@ class NotificationScreen extends StatelessWidget {
                         child: Icon(
                           Icons.notifications_active_outlined,
                           size: 25,
-                          color: isDarkMode ? Colors.white : Colors.black,
                         ),
                       ),
                       Column(
@@ -115,7 +99,6 @@ class NotificationScreen extends StatelessWidget {
                           Text(
                             "notifications".tr,
                             style: textStyleRes.mediumText.copyWith(
-                              color: isDarkMode ? Colors.white : Colors.black,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
@@ -124,7 +107,6 @@ class NotificationScreen extends StatelessWidget {
                           Text(
                             "theseare".tr,
                             style: textStyleRes.mediumText.copyWith(
-                              color: isDarkMode ? Colors.white : Colors.black,
                               fontSize: 18,
                             ),
                           ),
@@ -162,7 +144,6 @@ class NotificationScreen extends StatelessWidget {
                           Icon(
                             Icons.keyboard_arrow_down,
                             size: 25,
-                            color: isDarkMode ? Colors.white : Colors.black,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -171,8 +152,6 @@ class NotificationScreen extends StatelessWidget {
                               Text(
                                 "evidence".tr,
                                 style: textStyleRes.mediumText.copyWith(
-                                  color:
-                                      isDarkMode ? Colors.white : Colors.black,
                                   fontSize: 18,
                                 ),
                               ),
@@ -183,9 +162,6 @@ class NotificationScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   "evidencezdievidendei",
                                   style: textStyleRes.mediumText.copyWith(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
                                     fontSize: 16,
                                   ),
                                 ),

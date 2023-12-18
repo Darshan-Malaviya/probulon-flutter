@@ -16,7 +16,6 @@ class CommonDrawer extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Drawer(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       child: Column(
         children: [
           Container(
@@ -25,12 +24,11 @@ class CommonDrawer extends StatelessWidget {
                 top: height * 0.06, left: width * 0.04, right: width * 0.04),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: isDarkMode ? ColorUtils.appColor : Colors.white,
+              color: isDarkMode ? ColorUtils.containerColor : Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: isDarkMode
-                      ? Colors.transparent
-                      : Colors.grey.withOpacity(0.3),
+                  color:
+                      isDarkMode ? Colors.transparent : ColorUtils.shadowColor,
                   spreadRadius: 1,
                   blurRadius: 1,
                   offset: const Offset(0.0, 0.2),
@@ -56,15 +54,12 @@ class CommonDrawer extends StatelessWidget {
                             child: Icon(
                               drawerCntrl.drawerIcons[index],
                               size: 25,
-                              color: isDarkMode ? Colors.white : Colors.black,
                             ),
                           ),
                           Text(
                             "${drawerCntrl.drawerItems[index]}".tr,
                             style: textStyleRes.mediumText.copyWith(
-                                color: isDarkMode ? Colors.white : Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
+                                fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -80,8 +75,7 @@ class CommonDrawer extends StatelessWidget {
                 top: height * 0.05, left: width * 0.04, right: width * 0.04),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color:
-                  isDarkMode ? ColorUtils.grey.withOpacity(0.3) : Colors.white,
+              color: isDarkMode ? ColorUtils.containerColor : Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: isDarkMode ? Colors.transparent : ColorUtils.appColor,
@@ -110,7 +104,6 @@ class CommonDrawer extends StatelessWidget {
                       style: textStyleRes.mediumText.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
@@ -122,7 +115,6 @@ class CommonDrawer extends StatelessWidget {
                     style: textStyleRes.mediumText.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                 ),

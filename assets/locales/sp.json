@@ -51,6 +51,13 @@
   "daily": "diariamente",
   "weekly": "semanalmente",
   "dailyexecution": "Ejecución diaria",
-  "asleep": "dormido"
+  "asleep": "dormido",
+  "firstemail": "Primer correo electrónico",
+  "secondemail": "Segundo correo electrónico",
+  "thirdemail": "Tercer correo electrónico",
+  "Pleaseenterthefirstemail": "Por favor ingrese el primer correo electrónico",
+  "Pleaseenterthesecondemail": "Por favor ingrese el segundo correo electrónico",
+  "Pleaseenterthethirdemail": "Por favor ingresa el tercer correo electrónico",
+  "createUser": "Crea un usuario agregarlo a una instalacion"
 
 }

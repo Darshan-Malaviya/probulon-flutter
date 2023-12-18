@@ -9,24 +9,14 @@ class DashBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
-    final height = Get.height;
-    final width = Get.width;
     return GetBuilder<NavBarCntrl>(
       id: 'bottombar',
       builder: (controller) {
         return Scaffold(
           key: navBarCntrl.scaffoldKey,
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
           body: navBarCntrl.pages[navBarCntrl.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
             currentIndex: navBarCntrl.currentIndex,
-            selectedLabelStyle: const TextStyle(
-              color: Colors.white,
-            ),
-            unselectedLabelStyle: const TextStyle(color: Colors.white),
             onTap: (index) {
               navBarCntrl.currentIndex = index;
               controller.update(['bottombar']);
@@ -47,7 +37,6 @@ class DashBoardScreen extends StatelessWidget {
                       : Colors.white,
                 ),
                 label: "alarams".tr,
-                backgroundColor: Colors.white,
               ),
               BottomNavigationBarItem(
                 icon: Icon(

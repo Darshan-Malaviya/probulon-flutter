@@ -1,3 +1,6 @@
+import 'package:Probulon/screens/dash_board/users_screen.dart';
+import 'package:Probulon/screens/drawer_screens/devices_screen.dart';
+import 'package:Probulon/screens/drawer_screens/facilities_screen.dart';
 import 'package:Probulon/screens/drawer_screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,9 +9,9 @@ class DrawerCntrl extends GetxController {
   List screens = [
     ProfileScreen(),
     ProfileScreen(),
-    ProfileScreen(),
-    ProfileScreen(),
-    ProfileScreen(),
+    UsersScreen(),
+    DevicesScreen(),
+    FacilitiesScreen(),
     ProfileScreen(),
     ProfileScreen(),
     ProfileScreen(),

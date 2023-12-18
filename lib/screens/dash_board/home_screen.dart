@@ -21,15 +21,11 @@ class HomeScreen extends StatelessWidget {
     final width = Get.width;
     return Scaffold(
       key: homeScreenCntrl.scaffoldKey,
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
         toolbarHeight: height * 0.075,
         title: Text(
           "test".tr,
-          style: TextStyle(
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
+          style: textStyleRes.mediumText.copyWith(fontWeight: FontWeight.w500),
         ),
         elevation: 0,
         actions: [
@@ -88,15 +84,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ],
-        leading: InkResponse(
-          onTap: () {
-            homeScreenCntrl.scaffoldKey.currentState?.openDrawer();
-          },
-          child: Icon(
-            Icons.menu,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
       ),
       drawer: CommonDrawer(),
       body: GetBuilder<HomeScreenCntrl>(
@@ -121,8 +108,8 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           "partial".tr,
                           style: textStyleRes.mediumText.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: isDarkMode ? Colors.white : Colors.black),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -137,8 +124,8 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           "youare".tr,
                           style: textStyleRes.mediumText.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: isDarkMode ? Colors.white : Colors.black),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -191,8 +178,8 @@ class HomeScreen extends StatelessWidget {
                         child: Text(
                           homeScreenCntrl.name[index],
                           style: textStyleRes.mediumText.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: isDarkMode ? Colors.white : Colors.black),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
