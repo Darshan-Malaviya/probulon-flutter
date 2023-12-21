@@ -1,3 +1,4 @@
+import 'package:Probulon/Api/repository/get_lock_status_repo.dart';
 import 'package:Probulon/common/color.dart';
 import 'package:Probulon/common/images.dart';
 import 'package:Probulon/controller/dash_board_controller/home_screen_controller.dart';
@@ -15,6 +16,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var respose;
+
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
     final height = Get.height;
@@ -163,7 +166,14 @@ class HomeScreen extends StatelessWidget {
                   children: List.generate(
                     2,
                     (index) => CommonButton(
-                      onTap: () {
+                      onTap: () async {
+                        final resposeData =
+                            await updatelockStatusBy().updateLockStatusBy({
+                          "deviceId": "6575b58a204be2aa8a57113d",
+                          "updateLockStatusBy":
+                              homeScreenCntrl.name[index].toString(),
+                        });
+                        print(resposeData);
                         homeScreenCntrl.index = index;
                         controller.update(['home']);
                       },

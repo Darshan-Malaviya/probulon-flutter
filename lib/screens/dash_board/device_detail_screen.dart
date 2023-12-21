@@ -169,7 +169,8 @@ class DeviceDetailScreen extends StatelessWidget {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' ${deviceDetail.sliderValue * 100}%',
+                                text:
+                                    ' ${deviceDetail.sliderValue.toStringAsFixed(1)}%',
                               ),
                             ],
                           ),

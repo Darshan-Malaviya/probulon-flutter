@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:Probulon/demo.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,5 +95,24 @@ class LocalizationController extends GetxController implements GetxService {
     sharedPreferences.setString(
         AppConstants.LANGUAGE_CODE, locale.languageCode);
     sharedPreferences.setString(AppConstants.COUNTRY_CODE, locale.countryCode!);
+  }
+
+  @override
+  void initState() {
+    // To initialise the sg
+    FirebaseMessaging.instance.getInitialMessage().then((message) {});
+
+    // To initialise when app is not terminated
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        LocalNotificationService.display(message);
+      }
+    });
+
+    // To handle when app is open in
+    // user divide and heshe is using it
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print("on message opened app");
+    });
   }
 }

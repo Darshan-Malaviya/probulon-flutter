@@ -8,5 +8,5 @@ class DeviceDetail extends GetxController {
   }
 
   bool isSwitch = false;
-  double sliderValue = 0.0;
+  double sliderValue = 0.0 * 100;
 }

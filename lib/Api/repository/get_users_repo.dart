@@ -1,5 +1,4 @@
-import 'package:Probulon/Api/response_model/get_users_response_model.dart';
-import 'package:Probulon/utils/api_consts.dart';
+import 'package:Probulon/Api/api_consts.dart';
 
 import '../api_call.dart';
 
@@ -13,7 +12,6 @@ class getUserRepo {
       url,
       requestHeader,
     );
-    getUserResponseModelFromJson(response as String);
     return response;
   }
 }

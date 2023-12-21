@@ -1,6 +1,7 @@
 import 'package:Probulon/common/color.dart';
 import 'package:Probulon/controller/dash_board_controller/scenarios_controller.dart';
 import 'package:Probulon/controller/drawer_controller/devices_controller.dart';
+import 'package:Probulon/screens/dash_board/device_detail_screen.dart';
 import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class DevicesScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "alarams".tr,
+                          "mydevice".tr,
                           style: textStyleRes.mediumText.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -100,7 +101,11 @@ class DevicesScreen extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(DeviceDetailScreen(
+                          name: deviceCntrl.name[index],
+                        ));
+                      },
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: height * 0.008),
                         height: height * 0.07,

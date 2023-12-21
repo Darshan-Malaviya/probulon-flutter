@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Probulon/utils/api_consts.dart';
+import 'package:Probulon/Api/api_consts.dart';
 
 import '../api_call.dart';
 

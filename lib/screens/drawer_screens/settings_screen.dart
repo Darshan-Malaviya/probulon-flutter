@@ -1,14 +1,14 @@
 import 'package:Probulon/common/color.dart';
-import 'package:Probulon/controller/drawer_controller/users_controller.dart';
+import 'package:Probulon/controller/drawer_controller/setting_screen_controller.dart';
 import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UsersScreen extends StatelessWidget {
-  UsersScreen({super.key});
+class SettingScreen extends StatelessWidget {
+  SettingScreen({super.key});
 
-  UserCntrl userCntrl = Get.put(UserCntrl());
+  SettingCntrl settingCntrl = Get.put(SettingCntrl());
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class UsersScreen extends StatelessWidget {
     final isDarkMode = brightness == Brightness.dark;
     final height = Get.height;
     final width = Get.width;
-    return GetBuilder<UserCntrl>(
-      id: 'users',
+    return GetBuilder<SettingCntrl>(
+      id: 'setting',
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: height * 0.075,
             title: Text(
-              "test".tr,
+              "gerhold.net",
               style: TextStyle(),
             ),
             elevation: 0,
@@ -43,7 +43,7 @@ class UsersScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "disarmed".tr,
+                    "armed".tr,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
@@ -70,34 +70,29 @@ class UsersScreen extends StatelessWidget {
                   height: height * 0.1,
                   width: width,
                   decoration: BoxDecoration(
-                    color: isDarkMode
-                        ? ColorUtils.grey.withOpacity(0.3)
-                        : Colors.teal,
-                    gradient: LinearGradient(
-                        colors: isDarkMode
-                            ? [
-                                ColorUtils.grey,
-                                ColorUtils.grey,
-                              ]
-                            : [
-                                Colors.tealAccent,
-                                Colors.teal,
-                              ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight),
+                    color:
+                        isDarkMode ? ColorUtils.containerColor : Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: isDarkMode ? Colors.transparent : Colors.grey,
-                        spreadRadius: 0.5,
+                        color: isDarkMode
+                            ? Colors.transparent
+                            : ColorUtils.shadowColor,
+                        spreadRadius: 1,
                         blurRadius: 1,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0.0, 0.2),
                       ),
                     ],
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.07),
+                        child: Icon(
+                          Icons.settings,
+                          size: 25,
+                        ),
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,7 +106,7 @@ class UsersScreen extends StatelessWidget {
                           ),
                           SizedBox(height: height * 0.005),
                           Text(
-                            "createUser".tr,
+                            "customize".tr,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: textStyleRes.mediumText.copyWith(
@@ -120,20 +115,16 @@ class UsersScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.add,
-                        size: 25,
-                      ),
                     ],
                   ),
                 ),
                 Expanded(
                     child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: 4,
                   padding: EdgeInsets.symmetric(vertical: height * 0.01),
                   itemBuilder: (context, index) {
                     return Container(
-                      height: height * 0.07,
+                      height: height * 0.075,
                       margin: EdgeInsets.symmetric(
                           horizontal: width * 0.01, vertical: height * 0.01),
                       decoration: BoxDecoration(
@@ -142,59 +133,36 @@ class UsersScreen extends StatelessWidget {
                             : Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color:
-                                isDarkMode ? Colors.transparent : Colors.grey,
-                            spreadRadius: 0.5,
+                            color: isDarkMode
+                                ? Colors.transparent
+                                : ColorUtils.shadowColor,
+                            spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(0, 1),
+                            offset: const Offset(0.0, 0.2),
                           ),
                         ],
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       child: Row(
                         children: [
                           Padding(
                             padding:
-                                EdgeInsets.symmetric(horizontal: width * 0.04),
-                            child: Transform.scale(
-                              scale: 1.3,
-                              child: Switch(
-                                inactiveTrackColor: isDarkMode
-                                    ? Colors.white.withOpacity(0.5)
-                                    : Colors.grey,
-                                activeTrackColor: Colors.blue.withOpacity(0.8),
-                                inactiveThumbColor: Colors.grey.shade50,
-                                activeColor: Colors.white,
-                                value: userCntrl.switchValues[index],
-                                onChanged: (value) {
-                                  userCntrl.switchValues[index] = value;
-                                  controller.update(['users']);
-                                },
-                              ),
+                                EdgeInsets.symmetric(horizontal: width * 0.07),
+                            child: Icon(
+                              settingCntrl.icon[index],
+                              size: 25,
                             ),
                           ),
                           Text(
-                            "evidence".tr,
+                            "${settingCntrl.funcName[index]}".tr,
                             style: textStyleRes.mediumText.copyWith(
                               fontSize: 18,
                             ),
                           ),
                           Spacer(),
-                          Container(
-                            margin: EdgeInsets.only(right: width * 0.05),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.04,
-                              vertical: Get.height * 0.005,
-                            ),
-                            decoration: BoxDecoration(
-                              color: ColorUtils.appColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              "blocked".tr,
-                              style:
-                                  textStyleRes.smallText.copyWith(fontSize: 14),
-                            ),
+                          Padding(
+                            padding: EdgeInsets.only(right: width * 0.08),
+                            child: Icon(Icons.arrow_forward_ios),
                           ),
                         ],
                       ),

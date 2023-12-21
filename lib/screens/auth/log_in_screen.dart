@@ -31,6 +31,7 @@ class LoginScreen extends StatelessWidget {
       );
       if (response['isSuccess'] == true && response['status'] == 'SUCCESS') {
         PrefService.setValue('isLogged', true);
+        PrefService.setValue('token', response['data']['token']);
         Get.to(DashBoardScreen());
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

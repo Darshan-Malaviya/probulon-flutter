@@ -1,9 +1,12 @@
 class ApiConsts {
   static const baseUrl = 'http://79.143.90.196/api/v1';
 
-  // login consts
+  /// login consts
   static const loginUrl = '$baseUrl/auth/login';
 
-  // getuser consts
+  /// getuser consts
   static const getUsers = '$baseUrl/users/getAll';
+
+  /// get lock status
+  static const updateLockStatusBy = '$baseUrl/devices/updateLockStatusBy';
 }

@@ -36,6 +36,7 @@
   "help": "Ayuda",
   "logout": "Cerrar sesion",
   "copyrights": "Copyright Probulon Todos los derechos reservados",
+  "mydevice": "Mis dispositivos",
   "createdevice": "Crea dispositivos para tener mas control de tu instalacion",
   "disarmed": "desarmado",
   "scenariotype": "Tipo de ejecucio de escenario",
@@ -58,6 +59,11 @@
   "Pleaseenterthefirstemail": "Por favor ingrese el primer correo electrónico",
   "Pleaseenterthesecondemail": "Por favor ingrese el segundo correo electrónico",
   "Pleaseenterthethirdemail": "Por favor ingresa el tercer correo electrónico",
-  "createUser": "Crea un usuario agregarlo a una instalacion"
-
+  "createUser": "Crea un usuario agregarlo a una instalacion",
+  "setting": "Ajustes",
+  "customize": "Personaliza tu experiencia",
+  "networkfunctions": "Funciones de red",
+  "devicealarm": "Alarma del dispositivo",
+  "sleepinstallation": "Dormir instalacion",
+  "turnoffallnotifications": "Apagar instalacion"
 }

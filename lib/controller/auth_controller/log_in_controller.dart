@@ -6,10 +6,4 @@ class SigninCntrl extends GetxController {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailcntrl = TextEditingController();
   TextEditingController passcntrl = TextEditingController();
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 }
