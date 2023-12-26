@@ -1,11 +1,13 @@
 import 'package:Probulon/Api/api_response.dart';
 import 'package:Probulon/Api/response_model/get_lock_status_response_model.dart';
+import 'package:Probulon/Notification/notification_repo.dart';
 import 'package:Probulon/common/color.dart';
 import 'package:Probulon/common/images.dart';
 import 'package:Probulon/controller/dash_board_controller/home_screen_controller.dart';
 import 'package:Probulon/screens/drawer_screens/drawer.dart';
 import 'package:Probulon/utils/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -159,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                         'Authorization': 'Bearer ${homeScreenCntrl.token}',
                       });
 
-                      toast(
+                      await toast(
                           msgText: data.data.isLocked
                               ? "deviceIsUnLocked".tr
                               : "deviceIsLocked".tr,
@@ -169,6 +171,12 @@ class HomeScreen extends StatelessWidget {
                               : isDarkMode
                                   ? Colors.black
                                   : Colors.white);
+
+                      await SendNotification().sendNotification(
+                        data.data.isLocked
+                            ? "deviceIsUnLocked".tr
+                            : "deviceIsLocked".tr,
+                      );
                       controller.update(['home']);
                     },
                     child: CircleAvatar(
@@ -220,6 +228,12 @@ class HomeScreen extends StatelessWidget {
                               textColor:
                                   isDarkMode ? Colors.black : Colors.white);
 
+                          SendNotification().sendNotification(
+                            data.data.updateLockStatusBy == "Manual"
+                                ? "switchedtoAuto".tr
+                                : "switchedtoManual".tr,
+                          );
+
                           homeScreenCntrl.index = index;
                           controller.update(['home']);
                         },
@@ -247,7 +261,10 @@ class HomeScreen extends StatelessWidget {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitFadingCircle(
+                color: Colors.blue,
+                size: 40,
+              ),
             );
           }
         },

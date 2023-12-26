@@ -31,13 +31,11 @@ class MyApp extends StatelessWidget {
         bool isLogged = PrefService.getBool('isLogged');
         return GetMaterialApp(
           theme: ThemeData(
-            // Light mode theme
             primarySwatch: ColorUtils.scaffoldColor,
             backgroundColor: Colors.white,
             scaffoldBackgroundColor: ColorUtils.scaffoldColor,
           ),
           darkTheme: ThemeData.dark().copyWith(
-            // Dark mode theme
             primaryColor: Colors.black,
             backgroundColor: Colors.black,
             scaffoldBackgroundColor: Colors.black,

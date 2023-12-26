@@ -10,4 +10,8 @@ class ApiConsts {
   static const getLockStatus = '$baseUrl/devices/getLockStatus';
   static const updateLockStatusBy = '$baseUrl/devices/updateLockStatusBy';
   static const updateLockStatus = '$baseUrl/devices/updateLockStatus';
+
+  /// Notification
+
+  static const notificationUrl = 'https://fcm.googleapis.com/fcm/send';
 }

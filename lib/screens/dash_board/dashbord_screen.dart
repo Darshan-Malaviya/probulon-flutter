@@ -9,6 +9,8 @@ class DashBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return GetBuilder<NavBarCntrl>(
       id: 'bottombar',
       builder: (controller) {
@@ -21,6 +23,7 @@ class DashBoardScreen extends StatelessWidget {
               navBarCntrl.currentIndex = index;
               controller.update(['bottombar']);
             },
+            fixedColor: isDarkMode ? Colors.white : Colors.black,
             type: BottomNavigationBarType.fixed, // Disable animation
             items: [
               BottomNavigationBarItem(
@@ -32,9 +35,7 @@ class DashBoardScreen extends StatelessWidget {
                 ),
                 activeIcon: Icon(
                   Icons.workspaces,
-                  color: navBarCntrl.currentIndex == 0
-                      ? Colors.grey
-                      : Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: "alarams".tr,
               ),
@@ -47,9 +48,7 @@ class DashBoardScreen extends StatelessWidget {
                 ),
                 activeIcon: Icon(
                   Icons.watch_later,
-                  color: navBarCntrl.currentIndex == 1
-                      ? Colors.grey
-                      : Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: 'scenarios'.tr,
               ),
@@ -62,9 +61,7 @@ class DashBoardScreen extends StatelessWidget {
                 ),
                 activeIcon: Icon(
                   Icons.notifications_active,
-                  color: navBarCntrl.currentIndex == 2
-                      ? Colors.grey
-                      : Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: 'notifications'.tr,
               ),
@@ -77,9 +74,7 @@ class DashBoardScreen extends StatelessWidget {
                 ),
                 activeIcon: Icon(
                   Icons.lock,
-                  color: navBarCntrl.currentIndex == 3
-                      ? Colors.grey
-                      : Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: 'start'.tr,
               ),

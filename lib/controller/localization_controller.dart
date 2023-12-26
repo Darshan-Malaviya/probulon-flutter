@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:Probulon/demo.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,11 +102,11 @@ class LocalizationController extends GetxController implements GetxService {
     FirebaseMessaging.instance.getInitialMessage().then((message) {});
 
     // To initialise when app is not terminated
-    FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null) {
-        LocalNotificationService.display(message);
-      }
-    });
+    // FirebaseMessaging.onMessage.listen((message) {
+    //   if (message.notification != null) {
+    //     LocalNotificationService.display(message);
+    //   }
+    // });
 
     // To handle when app is open in
     // user divide and heshe is using it

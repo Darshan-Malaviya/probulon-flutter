@@ -1,13 +1,4 @@
 class StringRes {
-  static const loginLabel = 'Correo';
-  static const passLabel = 'Clave';
-  static const pleaseEnterTheMail = 'por favor ingresa el correo';
-  static const pleaseEnterTheValidMail = 'por favor ingrese el correo válido';
-  static const pleaseEnterThePassword = 'Por favor, ingrese contraseña';
-  static const pleaseEnterTheValidPassword =
-      'por favor ingrese una contraseña válida';
-
-  static const directToTheCloud = 'dirigido a la nube';
-  static const bienV = 'Bienvenido';
-  static const iniciar = 'Iniciar Sesion';
+  static const serverKey =
+      'AAAAfG1EA7U:APA91bHSBHItHvTu-hbdouPcZeA0Fq_qFN3rnIfnKEibwO5hyS-Elr8LmV0POKlIOLr6ETwV0MSMgjWqMj9le49pZ4TTxF1CEYNwuY4srjPSTp7XuWu8wEfT6Sl4LeA09StVjQHFKMKk';
 }
