@@ -2,47 +2,29 @@
 
 // ignore_for_file: must_be_immutable
 
+import 'package:Probulon/Api/api_response.dart';
+import 'package:Probulon/Api/response_model/log_in_response_model.dart';
 import 'package:Probulon/common/common_textfield.dart';
 import 'package:Probulon/screens/dash_board/dashbord_screen.dart';
+import 'package:Probulon/utils/pref_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Api/repository/login_repository.dart';
 import '../../common/images.dart';
 import '../../common/language_widget.dart';
 import '../../controller/auth_controller/log_in_controller.dart';
 import '../../controller/localization_controller.dart';
-import '../../utils/pref_services.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  SigninCntrl signinCntrl = Get.put(SigninCntrl());
+  LoginScreenController logInScreenController =
+      Get.put(LoginScreenController());
   @override
   Widget build(BuildContext context) {
     final brightness = MediaQuery.of(context).platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
     final height = Get.height;
     final width = Get.width;
-
-    Future<dynamic> handleLogin(email, password) async {
-      final response = await LoginRepo().callLoginApi(
-        email,
-        password,
-      );
-      if (response['isSuccess'] == true && response['status'] == 'SUCCESS') {
-        PrefService.setValue('isLogged', true);
-        PrefService.setValue('token', response['data']['token']);
-        Get.to(DashBoardScreen());
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response['message']),
-          ),
-        );
-      }
-      return response;
-    }
-
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
@@ -149,7 +131,7 @@ class LoginScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-        child: GetBuilder<SigninCntrl>(
+        child: GetBuilder<LoginScreenController>(
           id: 'sign',
           builder: (controller) {
             return Form(
@@ -183,36 +165,65 @@ class LoginScreen extends StatelessWidget {
                     CommonTextField(
                       lableText: "mail",
                       validationErrorText: 'pleaseEnterTheMail',
-                      controller: signinCntrl.emailcntrl,
+                      controller: logInScreenController.emailController,
                       themeMode: isDarkMode,
                     ),
                     SizedBox(height: height * 0.03),
                     CommonTextField(
                       lableText: "passLabel",
                       validationErrorText: 'pleaseEnterThePassword',
-                      controller: signinCntrl.passcntrl,
+                      controller: logInScreenController.passwordController,
                       themeMode: isDarkMode,
                     ),
                     SizedBox(height: height * 0.03),
-                    GestureDetector(
-                      onTap: () {
-                        if (controller.formKey.currentState!.validate()) {
-                          handleLogin(
-                            signinCntrl.emailcntrl.text,
-                            signinCntrl.passcntrl.text,
-                          );
-                        }
-                      },
-                      child: Container(
-                        height: height * 0.06,
-                        width: width * 0.3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.blue,
-                        ),
-                        child: Center(child: Text("log_in".tr)),
-                      ),
-                    ),
+                    GetBuilder<LoginScreenController>(builder: (controller) {
+                      if (controller.apiResponseLogin.status ==
+                              Status.INITIAL ||
+                          controller.apiResponseLogin.status ==
+                              Status.COMPLETE ||
+                          controller.apiResponseLogin.status == Status.ERROR) {
+                        return GestureDetector(
+                          onTap: () async {
+                            await controller.logInViewModel({
+                              "email":
+                                  logInScreenController.emailController.text,
+                              "password":
+                                  logInScreenController.passwordController.text,
+                            });
+                            if (controller.apiResponseLogin.status ==
+                                Status.COMPLETE) {
+                              LogInResponseModel data =
+                                  controller.apiResponseLogin.data;
+                              if (data.isSuccess == true) {
+                                PrefService.setValue('isLogged', true);
+                                PrefService.setValue('token', data.data.token);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DashBoardScreen(),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('${data.message}')));
+                              }
+                            }
+                            // if (formKey.currentState!.validate()) ;
+                          },
+                          child: Container(
+                            height: height * 0.06,
+                            width: width * 0.3,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.blue,
+                            ),
+                            child: Center(child: Text("log_in".tr)),
+                          ),
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
                   ],
                 ),
               ),

@@ -63,5 +63,11 @@
   "networkfunctions": "Features",
   "devicealarm": "Device alarm",
   "sleepinstallation": "Sleep installation",
-  "turnoffallnotifications": "Turn off installation"
+  "turnoffallnotifications": "Turn off installation",
+  "manual": "Manual",
+  "automatic": "Automatic",
+  "switchedtoAuto": "Switched To Automatic",
+  "switchedtoManual": "Switched To Manual",
+  "deviceIsUnLocked": "Device Is Unlocked !",
+  "deviceIsLocked": "Device Is locked"
 }

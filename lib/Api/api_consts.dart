@@ -7,6 +7,7 @@ class ApiConsts {
   /// getuser consts
   static const getUsers = '$baseUrl/users/getAll';
 
-  /// get lock status
+  static const getLockStatus = '$baseUrl/devices/getLockStatus';
   static const updateLockStatusBy = '$baseUrl/devices/updateLockStatusBy';
+  static const updateLockStatus = '$baseUrl/devices/updateLockStatus';
 }

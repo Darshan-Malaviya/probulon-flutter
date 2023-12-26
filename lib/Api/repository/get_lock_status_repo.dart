@@ -1,21 +1,20 @@
-import 'dart:convert';
+import 'dart:developer';
 
 import 'package:Probulon/Api/api_consts.dart';
-import 'package:Probulon/utils/pref_services.dart';
+import 'package:Probulon/Api/api_handlers.dart';
+import 'package:Probulon/Api/response_model/get_lock_status_response_model.dart';
 
-import '../api_call.dart';
-
-class updatelockStatusBy {
-  Future<dynamic> updateLockStatusBy(Map<String, dynamic> reqBody) async {
-    final token = PrefService.getString('token');
-    Map<String, String> requestHeader = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-    String url = ApiConsts.updateLockStatusBy;
-    final response =
-        ApiCall.callPostApi(url, requestHeader, jsonEncode(reqBody));
-
-    return response;
+class GetLockStatusRepo {
+  static Future getlockStatusRepo(
+      {required Map<String, dynamic> body, Map<String, String>? header}) async {
+    var response = await ApiService().getResponse(
+        apiType: APIType.aPost,
+        url: ApiConsts.getLockStatus,
+        body: body,
+        header: header);
+    GetLockStatusResponseModel getLockStatusResponseModel =
+        GetLockStatusResponseModel.fromJson(response);
+    log('-----------------------${ApiConsts.getLockStatus}');
+    return getLockStatusResponseModel;
   }
 }

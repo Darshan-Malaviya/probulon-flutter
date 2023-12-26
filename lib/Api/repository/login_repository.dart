@@ -1,4 +1,4 @@
-import 'dart:convert';
+/*import 'dart:convert';
 
 import 'package:Probulon/Api/api_consts.dart';
 
@@ -18,5 +18,21 @@ class LoginRepo {
         ApiCall.callPostApi(url, requestHeader, jsonEncode(requestBody));
 
     return response;
+  }
+}*/
+import 'dart:developer';
+
+import 'package:Probulon/Api/api_consts.dart';
+import 'package:Probulon/Api/api_handlers.dart';
+import 'package:Probulon/Api/response_model/log_in_response_model.dart';
+
+class LogInRepo {
+  static Future logInRepo({required Map<String, dynamic> body}) async {
+    var response = await ApiService().getResponse(
+        apiType: APIType.aPost, url: ApiConsts.loginUrl, body: body);
+    LogInResponseModel logInResponseModel =
+        LogInResponseModel.fromJson(response);
+    log('-----------------------${ApiConsts.loginUrl}');
+    return logInResponseModel;
   }
 }

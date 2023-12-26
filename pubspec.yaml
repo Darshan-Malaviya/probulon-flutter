@@ -44,6 +44,8 @@ dependencies:
   http:
   image_picker: ^0.8.0
   flutter_local_notifications:
+  dio:
+  fluttertoast:
 
 
 

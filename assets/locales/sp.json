@@ -65,5 +65,11 @@
   "networkfunctions": "Funciones de red",
   "devicealarm": "Alarma del dispositivo",
   "sleepinstallation": "Dormir instalacion",
-  "turnoffallnotifications": "Apagar instalacion"
+  "turnoffallnotifications": "Apagar instalacion",
+  "manual": "Manual",
+  "automatic": "Automática",
+  "switchedtoAuto": "Cambiada a automática",
+  "switchedtoManual": "Cambiada a manual",
+  "deviceIsUnLocked": "¡El dispositivo está desbloqueado!",
+  "deviceIsLocked": "El dispositivo está bloqueado"
 }
