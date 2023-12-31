@@ -16,7 +16,7 @@ import '../../common/common_button.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  HomeScreenCntrl homeScreenCntrl = Get.put(HomeScreenCntrl());
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,6 @@ class HomeScreen extends StatelessWidget {
     final height = Get.height;
     final width = Get.width;
     return Scaffold(
-      key: homeScreenCntrl.scaffoldKey,
       appBar: AppBar(
         toolbarHeight: height * 0.075,
         title: Text(
@@ -91,7 +90,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       drawer: CommonDrawer(),
-      body: GetBuilder<HomeScreenCntrl>(
+      body: GetBuilder<HomeScreenController>(
         id: 'home',
         builder: (controller) {
           if (controller.apiResponseGetLockStatus.status == Status.INITIAL ||
@@ -145,20 +144,22 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: height * 0.05),
                   GestureDetector(
                     onTap: () async {
-                      homeScreenCntrl.isIconChanges =
-                          !homeScreenCntrl.isIconChanges;
+                      homeScreenController.isIconChanges =
+                          !homeScreenController.isIconChanges;
 
-                      await homeScreenCntrl.updateLockStatusviewModel(body: {
+                      await homeScreenController
+                          .updateLockStatusviewModel(body: {
                         "deviceId": "6575b58a204be2aa8a57113d",
-                        "isLocked": homeScreenCntrl.isIconChanges.toString()
+                        "isLocked":
+                            homeScreenController.isIconChanges.toString()
                       }, header: {
-                        'Authorization': 'Bearer ${homeScreenCntrl.token}',
+                        'Authorization': 'Bearer ${homeScreenController.token}',
                       });
 
-                      await homeScreenCntrl.getLockStatusviewModel(body: {
+                      await homeScreenController.getLockStatusviewModel(body: {
                         "deviceId": "6575b58a204be2aa8a57113d"
                       }, header: {
-                        'Authorization': 'Bearer ${homeScreenCntrl.token}',
+                        'Authorization': 'Bearer ${homeScreenController.token}',
                       });
 
                       await toast(
@@ -173,9 +174,16 @@ class HomeScreen extends StatelessWidget {
                                   : Colors.white);
 
                       await SendNotification().sendNotification(
-                        data.data.isLocked
-                            ? "deviceIsUnLocked".tr
-                            : "deviceIsLocked".tr,
+                        requestBody: {
+                          "to":
+                              "ca1I3ZYuS7yNh7RTZV157j:APA91bFWhisdYTBpP7GhdYsu_GFpu1xSMdue8ItYjzmqPL77tt0Zln81-_cMfrHC1EnMRLpbqCNQpcF-JpaBNHSU2DdOpRqLVXEvSOK0nSGR1g2sIjBsmpP1p0kuNuqzQSntNH_syjEw",
+                          "notification": {
+                            "title": "Probulon",
+                            "body": data.data.isLocked
+                                ? "deviceIsUnLocked".tr
+                                : "deviceIsLocked".tr,
+                          },
+                        },
                       );
                       controller.update(['home']);
                     },
@@ -204,20 +212,23 @@ class HomeScreen extends StatelessWidget {
                         onTap: () async {
                           /// Update Lock Status By
 
-                          await homeScreenCntrl
+                          await homeScreenController
                               .updateLockStatusByviewModel(body: {
                             "deviceId": "6575b58a204be2aa8a57113d",
                             "updateLockStatusBy":
-                                homeScreenCntrl.name[index].toString(),
+                                homeScreenController.name[index].toString(),
                           }, header: {
-                            'Authorization': 'Bearer ${homeScreenCntrl.token}',
+                            'Authorization':
+                                'Bearer ${homeScreenController.token}',
                           });
 
                           /// Get Lock Status
-                          await homeScreenCntrl.getLockStatusviewModel(body: {
+                          await homeScreenController
+                              .getLockStatusviewModel(body: {
                             "deviceId": "6575b58a204be2aa8a57113d"
                           }, header: {
-                            'Authorization': 'Bearer ${homeScreenCntrl.token}',
+                            'Authorization':
+                                'Bearer ${homeScreenController.token}',
                           });
 
                           toast(
@@ -229,25 +240,32 @@ class HomeScreen extends StatelessWidget {
                                   isDarkMode ? Colors.black : Colors.white);
 
                           SendNotification().sendNotification(
-                            data.data.updateLockStatusBy == "Manual"
-                                ? "switchedtoAuto".tr
-                                : "switchedtoManual".tr,
+                            requestBody: {
+                              "to":
+                                  "ca1I3ZYuS7yNh7RTZV157j:APA91bFWhisdYTBpP7GhdYsu_GFpu1xSMdue8ItYjzmqPL77tt0Zln81-_cMfrHC1EnMRLpbqCNQpcF-JpaBNHSU2DdOpRqLVXEvSOK0nSGR1g2sIjBsmpP1p0kuNuqzQSntNH_syjEw",
+                              "notification": {
+                                "title": "Probulon",
+                                "body": data.data.updateLockStatusBy == "Manual"
+                                    ? "switchedtoAuto".tr
+                                    : "switchedtoManual".tr,
+                              },
+                            },
                           );
 
-                          homeScreenCntrl.index = index;
+                          homeScreenController.index = index;
                           controller.update(['home']);
                         },
                         height: height * 0.09,
                         width: width * 0.45,
                         decoratioin: BoxDecoration(
                             color: data.data.updateLockStatusBy ==
-                                    homeScreenCntrl.name[index]
+                                    homeScreenController.name[index]
                                 ? Colors.red
                                 : Colors.grey.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(40)),
                         child: Center(
                           child: Text(
-                            homeScreenCntrl.name[index],
+                            homeScreenController.name[index],
                             style: textStyleRes.mediumText.copyWith(
                               fontWeight: FontWeight.w500,
                             ),

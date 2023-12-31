@@ -6,11 +6,9 @@ import 'package:Probulon/Api/response_model/get_lock_status_response_model.dart'
 import 'package:Probulon/Api/response_model/update_lock_status_by_response_model.dart';
 import 'package:Probulon/Api/response_model/update_lock_status_response_model.dart';
 import 'package:Probulon/utils/pref_services.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreenCntrl extends GetxController {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+class HomeScreenController extends GetxController {
   var responseData;
   var lockStatus;
   bool isIconChanges = false;

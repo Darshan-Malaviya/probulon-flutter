@@ -21,7 +21,7 @@ class FirebaseService {
     String? fcmToken = await messaging.getToken();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      var android = AndroidNotificationDetails(
+      var android = const AndroidNotificationDetails(
         'channel_id',
         'channel_name',
         priority: Priority.high,
@@ -47,7 +47,7 @@ class FirebaseService {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
       android: initializationSettingsAndroid,
     );
